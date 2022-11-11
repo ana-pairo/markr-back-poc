@@ -2,8 +2,9 @@ import bcrypt from "bcrypt"
 
 import { Request, Response } from "express";
 import { STATUS_CODE } from "../enums/statusCode.js";
-import { insertUser } from "../repositories/auth.repository.js";
-import {SignUp} from "../protocols/auth.type.js";
+import { createSession, insertUser } from "../repositories/auth.repository.js";
+import {SignUp} from "../protocols/bodies.type.js";
+import { User } from "../protocols/tables.types.js";
 
 
 async function registerNewUser (req: Request, res:Response){
@@ -24,6 +25,26 @@ console.log(newUser)
     }
 }
 
-export {registerNewUser}
+async function logInUser (req: Request, res:Response) {
+    const user = res.locals.user as User;
+    const password : string = req.body.password;
+
+    const data : {userId: number}= {
+        userId: user.id
+    }
+
+   
+   try {
+    if(bcrypt.compareSync(password, user.password)){
+       const result = await createSession(data);
+
+        res.status(STATUS_CODE.CREATED).send(result.token);
+    }
+   } catch (error) {
+    res.sendStatus(STATUS_CODE.SERVER_ERROR);
+   }
+}
+
+export {registerNewUser, logInUser}
 
 

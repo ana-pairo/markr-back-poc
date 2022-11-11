@@ -1,11 +1,12 @@
 import { Prisma, Users } from "@prisma/client";
 import prismaClient from "../database/prismaClient.js";
+import { Session } from "../protocols/bodies.type.js";
 
 async function insertUser (data:  Prisma.UsersUncheckedCreateInput ) : Promise<Users> {
-const resultado = prismaClient.users.create({
+    return  prismaClient.users.create({
     data
     })
-    return resultado
+    
 }
 
 async function checkEmail (email: string) : Promise<Users | null>{
@@ -14,4 +15,10 @@ async function checkEmail (email: string) : Promise<Users | null>{
     })
 }
 
- export {insertUser, checkEmail}
+async function createSession (data: Prisma.SessionCreateManyInput) : Promise<Session>{
+   return prismaClient.session.create({
+    data
+   })
+}
+
+ export {insertUser, checkEmail, createSession}

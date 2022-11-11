@@ -9,11 +9,11 @@ const signUpSCHEMA = joi.object({
     email: joi.string().email().required(),
     password: joi
       .string()
-      .required(),
-    //   .min(5)
-    //   .regex(/\d/)
-    //   .regex(/[A-Z]/)
-    //   .regex(/[^A-Z a-z0-9]/),
+      .required()
+      .min(5)
+      .regex(/\d/)
+      .regex(/[A-Z]/)
+      .regex(/[^A-Z a-z0-9]/),
   });
   
   const signInSCHEMA = joi.object({
