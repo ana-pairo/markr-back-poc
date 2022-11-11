@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"sourceMap": true,
+		"outDir": "dist",
+		"strict": true,
+		"lib": ["esnext"],
+		"esModuleInterop": true,
+		"module": "es6",
+		"moduleResolution":"Node"
+	},
+	"ts-node": {
+		"esm": true
+	}
+}
