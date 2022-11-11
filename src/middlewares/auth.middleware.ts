@@ -1,10 +1,10 @@
-import { NextFunction, Request, Response, Send } from "express";
+import { NextFunction, Request, Response } from "express";
 import Joi from "joi";
 import { STATUS_CODE } from "../enums/statusCode.js";
 import { signUpSCHEMA, signInSCHEMA } from "../schemas/auth.schema.js";
-import { checkEmail} from "../repositories/auth.repository.js";
+import { checkEmail, checkToken} from "../repositories/auth.repository.js";
 import { SignIn, SignUp } from "../protocols/bodies.type.js";
-import { User } from "../protocols/tables.types.js";
+
 
 
 async function signUpMiddleware (req: Request, res: Response, next: NextFunction){
@@ -61,7 +61,32 @@ async function signInMiddleware (req: Request, res: Response, next: NextFunction
 }
 
 
-export {signUpMiddleware, signInMiddleware}
+async function tokenAutentication (req: Request, res: Response, next: NextFunction){
+
+    const token : string | undefined = req.headers.authorization?.replace("Bearer ", "");
+
+    if(!token){
+        res.sendStatus(STATUS_CODE.UNAUTHORIZED);
+        return
+    }
+
+    try {
+       const session =  await checkToken(token);
+
+       if(session){
+        res.locals.userId = session.userId;
+        res.locals.token = session.token;
+       }else{
+        res.sendStatus(STATUS_CODE.UNAUTHORIZED)
+       }
+
+       next();
+    } catch (error) {
+        res.sendStatus(STATUS_CODE.SERVER_ERROR);
+    }
+}
+
+export {signUpMiddleware, signInMiddleware, tokenAutentication}
 
 function checkBody (res: Response, isBodyValid : Joi.ValidationResult){
    

@@ -8,9 +8,12 @@ server.use(cors());
 server.use(express.json());
 
 import authRouter from "./routers/auth.router.js"
+import {tokenAutentication} from "./middlewares/auth.middleware.js"
 
 
 server.use(authRouter);
+
+server.use(tokenAutentication);
 
 server.get("/status", (req: Request, res: Response) => {
     res.sendStatus(200);

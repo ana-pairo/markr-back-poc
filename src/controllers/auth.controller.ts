@@ -2,7 +2,7 @@ import bcrypt from "bcrypt"
 
 import { Request, Response } from "express";
 import { STATUS_CODE } from "../enums/statusCode.js";
-import { createSession, insertUser } from "../repositories/auth.repository.js";
+import { createSession, deleteSession, insertUser } from "../repositories/auth.repository.js";
 import {SignUp} from "../protocols/bodies.type.js";
 import { User } from "../protocols/tables.types.js";
 
@@ -14,7 +14,7 @@ async function registerNewUser (req: Request, res:Response){
     const passwordHash : string = bcrypt.hashSync(password, 12);
   
     const newUser = {email, name, password: passwordHash} as SignUp;
-console.log(newUser)
+
     try {
         await insertUser(newUser);
 
@@ -45,6 +45,18 @@ async function logInUser (req: Request, res:Response) {
    }
 }
 
-export {registerNewUser, logInUser}
+async function logOutUser (req: Request, res:Response) {
+    const token : string = res.locals.token;
+
+    try {
+        await deleteSession(token);
+
+        res.sendStatus(STATUS_CODE.NO_CONTENT);
+    } catch (error) {
+        res.sendStatus(STATUS_CODE.SERVER_ERROR);
+    }
+}
+
+export {registerNewUser, logInUser, logOutUser}
 
 
