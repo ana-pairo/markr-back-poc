@@ -11,12 +11,13 @@ datasource db {
 }
 
 model Users {
-  id        Int       @id @default(autoincrement())
-  name      String
-  email     String    @unique
-  password  String    @db.VarChar(200)
-  createdAt DateTime  @default(now())
-  Session   Session[]
+  id         Int          @id @default(autoincrement())
+  name       String
+  email      String       @unique
+  password   String       @db.VarChar(200)
+  createdAt  DateTime     @default(now())
+  Session    Session[]
+  UsersBooks UsersBooks[]
 
   @@map("users")
 }
@@ -29,4 +30,22 @@ model Session {
   createdAt DateTime @default(now())
 
   @@map("sessions")
+}
+
+model UsersBooks {
+  id             Int        @id @default(autoincrement())
+  userId         Int
+  user           Users      @relation(fields: [userId], references: [id])
+  name           String
+  link           String?
+  chaptersNumber Int?
+  pagesNumber    Int?
+  status         StatusRole @default(reading)
+
+  @@map("users_books")
+}
+
+enum StatusRole {
+  finished
+  reading
 }

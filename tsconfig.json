@@ -6,7 +6,24 @@
 		"lib": ["esnext"],
 		"esModuleInterop": true,
 		"module": "es6",
-		"moduleResolution":"Node"
+		"moduleResolution":"Node",
+		"rootDirs": ["src"],
+		"baseUrl": ".",
+		"paths": {
+			"@controllers/*": ["./src/controllers/*"],
+			"@middlewares/*": ["./src/middlewares/*"],
+			"@protocols/*": ["./src/protocols/*"],
+			"@repositories/*": ["./src/repositories/*"],
+			"@routers/*": ["./src/routers/*"],
+			"@schemas/*": ["./src/schemas/*"],
+			"@enums/*": ["./src/enums/*"],
+			"@database/*": ["./src/database/*"],
+		},
+		"plugins": [
+			{
+			  "transform": "typescript-transform-paths"
+			}
+		  ]
 	},
 	"ts-node": {
 		"esm": true

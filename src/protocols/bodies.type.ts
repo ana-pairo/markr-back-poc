@@ -1,15 +1,29 @@
-
 export type SignUp = {
-    email: string,
-    name: string,
-    password: string
-}
+  email: string;
+  name: string;
+  password: string;
+};
 
 export type Session = {
-    id?: number,
-    userId: number,
-    token: string,
-    createdAt?: Date | string
+  id?: number;
+  userId: number;
+  token: string;
+  createdAt?: Date | string;
+};
+
+export type Book = {
+  id: number;
+  userId: number;
+  name: string;
+  link?: string;
+  chaptersNumber?: number;
+  pagesNumber?: number;
+  status?: StatusRole;
+};
+
+enum StatusRole {
+  finished = "finished",
+  reading = "reading",
 }
 
-export type SignIn = Omit<SignUp, "password">
+export type SignIn = Omit<SignUp, "password">;
