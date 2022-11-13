@@ -3,12 +3,12 @@ import {
   signUpMiddleware,
   signInMiddleware,
   tokenAutentication,
-} from "@middlewares/auth.middleware.js";
+} from "@middlewares/auth.middleware";
 import {
   registerNewUser,
   logInUser,
   logOutUser,
-} from "@controllers/auth.controller.js";
+} from "@controllers/auth.controller";
 
 const router = express.Router();
 

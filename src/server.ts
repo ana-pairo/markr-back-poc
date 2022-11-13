@@ -7,8 +7,8 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-import authRouter from "@routers/auth.router.js";
-import { tokenAutentication } from "@middlewares/auth.middleware.js";
+import authRouter from "@routers/auth.router";
+import { tokenAutentication } from "@middlewares/auth.middleware";
 
 server.use(authRouter);
 
