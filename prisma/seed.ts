@@ -1,6 +1,14 @@
-import prismaClient from "@database/prismaClient";
-import { Prisma, StatusRole, Users, UsersBooks } from "@prisma/client";
-import { Book, SignUp } from "@protocols/bodies.type";
+import {
+  PrismaClient,
+  Prisma,
+  StatusRole,
+  Users,
+  UsersBooks,
+} from "@prisma/client";
+
+const prismaClient = new PrismaClient();
+
+import { SignUp } from "@protocols/bodies.type";
 import bcrypt from "bcrypt";
 
 async function seedingUser(data: Prisma.UsersCreateInput): Promise<Users> {
@@ -32,7 +40,7 @@ async function main() {
     });
 
     console.log(
-      `User ${userResult.name} and book ${bookResult.name} were successfully inserted`
+      `User '${userResult.name}' and book '${bookResult.name}' were successfully inserted`
     );
   } catch (error) {
     console.log(error);
