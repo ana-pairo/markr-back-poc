@@ -32,7 +32,7 @@ npm i
 5. Run all migrations
 
 ```bash
-npm run migration:run
+npx prisma migrate dev
 ```
 6. Seed db
 
