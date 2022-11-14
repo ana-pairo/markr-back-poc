@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
+    "seed": "npx prisma db seed",
     "dev": "npx nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register src/server.ts' -e ts"
   },
   "keywords": [],
