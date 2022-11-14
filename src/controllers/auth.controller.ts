@@ -38,7 +38,11 @@ async function logInUser(req: Request, res: Response) {
     if (bcrypt.compareSync(password, user.password)) {
       const result = await createSession(data);
 
-      res.status(STATUS_CODE.CREATED).send(result.token);
+      const response = {
+        token: result.token,
+      };
+
+      res.status(STATUS_CODE.CREATED).send(response);
     }
   } catch (error) {
     res.sendStatus(STATUS_CODE.SERVER_ERROR);

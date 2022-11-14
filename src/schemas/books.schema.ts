@@ -9,7 +9,7 @@ const newBookSCHEMA = joi.object({
     ),
   chaptersNumber: joi.number(),
   pagesNumber: joi.number(),
-  status: joi.string().required(),
+  status: joi.string().required().valid("reading", "finished"),
 });
 
 export { newBookSCHEMA };
