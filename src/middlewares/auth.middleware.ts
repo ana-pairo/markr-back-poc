@@ -86,9 +86,11 @@ async function tokenAutentication(
       res.locals.token = session.token;
     } else {
       res.sendStatus(STATUS_CODE.UNAUTHORIZED);
+      return;
     }
   } catch (error) {
     res.sendStatus(STATUS_CODE.SERVER_ERROR);
+    return;
   }
 
   next();
