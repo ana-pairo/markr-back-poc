@@ -1,31 +1,24 @@
 {
 	"compilerOptions": {
+		//prisma configuration pointed on the website
 		"sourceMap": true,
 		"outDir": "dist",
 		"strict": true,
 		"lib": ["esnext"],
 		"esModuleInterop": true,
-		"module": "es6",
+		//prisma
+		"module": "CommonJS",
 		"moduleResolution":"Node",
-		"rootDirs": ["src"],
-		"baseUrl": ".",
+		"baseUrl": "src",
 		"paths": {
-			"@controllers/*": ["./src/controllers/*"],
-			"@middlewares/*": ["./src/middlewares/*"],
-			"@protocols/*": ["./src/protocols/*"],
-			"@repositories/*": ["./src/repositories/*"],
-			"@routers/*": ["./src/routers/*"],
-			"@schemas/*": ["./src/schemas/*"],
-			"@enums/*": ["./src/enums/*"],
-			"@database/*": ["./src/database/*"],
-		},
-		"plugins": [
-			{
-			  "transform": "typescript-transform-paths"
-			}
-		  ]
-	},
-	"ts-node": {
-		"esm": true
+			"@controllers/*": ["./controllers/*"],
+			"@middlewares/*": ["./middlewares/*"],
+			"@protocols/*": ["./protocols/*"],
+			"@repositories/*": ["./repositories/*"],
+			"@routers/*": ["./routers/*"],
+			"@schemas/*": ["./schemas/*"],
+			"@enums/*": ["./enums/*"],
+			"@database/*": ["./database/*"],
+		}
 	}
 }

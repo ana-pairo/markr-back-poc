@@ -7,12 +7,13 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-import authRouter from "@routers/auth.router";
 import { tokenAutentication } from "@middlewares/auth.middleware";
+import authRouter from "@routers/auth.router";
+import booksRouter from "@routers/books.router";
 
 server.use(authRouter);
-
 server.use(tokenAutentication);
+server.use(booksRouter);
 
 server.get("/status", (req: Request, res: Response) => {
   res.sendStatus(200);

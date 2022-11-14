@@ -5,11 +5,10 @@ import {
   createSession,
   deleteSession,
   insertUser,
-} from "@repositories/auth.repository"
-import { SignUp } from "@protocols/bodies.type"
+} from "@repositories/auth.repository";
+import { SignUp } from "@protocols/bodies.type";
 import { User } from "@protocols/tables.types";
 import { STATUS_CODE } from "@enums/statusCode";
-
 
 async function registerNewUser(req: Request, res: Response) {
   const { email, name, password } = req.body as SignUp;
@@ -23,7 +22,6 @@ async function registerNewUser(req: Request, res: Response) {
 
     res.sendStatus(STATUS_CODE.CREATED);
   } catch (error) {
-    console.log(error);
     res.sendStatus(STATUS_CODE.SERVER_ERROR);
   }
 }

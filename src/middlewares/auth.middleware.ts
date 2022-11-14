@@ -20,7 +20,6 @@ async function signUpMiddleware(
 
   try {
     const isEmailRepited = await checkEmail(newUser.email);
-    console.log(isEmailRepited);
 
     if (isEmailRepited) {
       res.status(STATUS_CODE.CONFLICT).send("This email is not available");
@@ -88,11 +87,11 @@ async function tokenAutentication(
     } else {
       res.sendStatus(STATUS_CODE.UNAUTHORIZED);
     }
-
-    next();
   } catch (error) {
     res.sendStatus(STATUS_CODE.SERVER_ERROR);
   }
+
+  next();
 }
 
 export { signUpMiddleware, signInMiddleware, tokenAutentication };

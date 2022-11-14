@@ -19,6 +19,8 @@ export type Book = {
   chaptersNumber?: number;
   pagesNumber?: number;
   status?: StatusRole;
+  insertedAt?: Date | string;
+  updatedAt?: Date | string;
 };
 
 enum StatusRole {

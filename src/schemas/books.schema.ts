@@ -2,7 +2,6 @@ import joi from "joi";
 
 const newBookSCHEMA = joi.object({
   name: joi.string().trim().required(),
-  digitalPlatform: joi.boolean().required(),
   link: joi
     .string()
     .regex(
